@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Waslaa — recebe informações de diferentes canais e as transforma em experiências acessíveis em tempo real.">
+  <meta name="color-scheme" content="dark light">
+  <title>Waslaa — Informação Acessível em Tempo Real</title>
+  <script>
+    (function () {
+      try {
+        var key = "waslaa_theme_v1";
+        var stored = localStorage.getItem(key);
+        var theme = stored === "light" || stored === "dark"
+          ? stored
+          : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+      try {
+        var scaleKey = "waslaa_text_scale_v1";
+        var scaleRaw = localStorage.getItem(scaleKey);
+        var scale = parseFloat(scaleRaw);
+        if (!(scale >= 0.875 && scale <= 1.25)) scale = 1;
+        scale = Math.round(scale * 1000) / 1000;
+        document.documentElement.style.setProperty("--text-scale", String(scale));
+        document.documentElement.setAttribute("data-text-scale", String(scale));
+      } catch (e2) {
+        document.documentElement.style.setProperty("--text-scale", "1");
+        document.documentElement.setAttribute("data-text-scale", "1");
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo" data-i18n="a11y.skip">Ir para o conteúdo</a>
+
+  <header class="site-header" id="topo">
+    <div class="header-inner">
+      <a class="brand" href="#topo" data-i18n-aria-label="a11y.brandHome" aria-label="Waslaa — início">
+        <img
+          class="brand-logo"
+          src="assets/logo-waslaa-uso-externo.png"
+          width="377"
+          height="124"
+          alt=""
+          decoding="async">
+      </a>
+      <div class="header-tools">
+        <div class="lang-switcher" role="group" data-lang-switcher data-i18n-aria-label="a11y.langSwitcher" aria-label="Selecionar idioma">
+          <button type="button" class="lang-btn is-active" data-set-lang="pt-BR" aria-pressed="true" aria-label="Português">
+            <span class="lang-code" aria-hidden="true">PT</span>
+            <span class="lang-name" data-i18n="a11y.langPt">Português</span>
+          </button>
+          <button type="button" class="lang-btn" data-set-lang="es-CL" aria-pressed="false" aria-label="Español (Chile)">
+            <span class="lang-code" aria-hidden="true">ES</span>
+            <span class="lang-name" data-i18n="a11y.langEs">Español (Chile)</span>
+          </button>
+          <button type="button" class="lang-btn" data-set-lang="en-US" aria-pressed="false" aria-label="English (US)">
+            <span class="lang-code" aria-hidden="true">EN</span>
+            <span class="lang-name" data-i18n="a11y.langEn">English (US)</span>
+          </button>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-pressed="false"
+          aria-label="Alternar para tema claro">
+          <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" focusable="false">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" focusable="false">
+              <path d="M20.5 14.2A8.2 8.2 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="theme-toggle-text" data-theme-toggle-text>Escuro</span>
+        </button>
+        <div
+          class="a11y-tools"
+          role="group"
+          data-a11y-tools
+          data-i18n-aria-label="a11y.toolsGroup"
+          aria-label="Ferramentas de acessibilidade">
+          <div
+            class="text-scale"
+            role="group"
+            data-text-scale-group
+            data-i18n-aria-label="a11y.textScaleGroup"
+            aria-label="Tamanho do texto">
+            <button
+              type="button"
+              class="a11y-btn a11y-btn-scale"
+              data-text-scale-down
+              data-i18n-aria-label="a11y.textDecrease"
+              aria-label="Diminuir tamanho do texto">
+              <span class="a11y-btn-label" aria-hidden="true">A−</span>
+            </button>
+            <button
+              type="button"
+              class="a11y-btn a11y-btn-scale"
+              data-text-scale-up
+              data-i18n-aria-label="a11y.textIncrease"
+              aria-label="Aumentar tamanho do texto">
+              <span class="a11y-btn-label" aria-hidden="true">A+</span>
+            </button>
+          </div>
+          <div
+            class="speech-controls"
+            role="group"
+            data-speech-controls
+            data-i18n-aria-label="a11y.speechGroup"
+            aria-label="Leitura em voz alta">
+            <button
+              type="button"
+              class="a11y-btn a11y-btn-speech"
+              data-speech-toggle
+              data-i18n-aria-label="a11y.speechPlay"
+              aria-label="Ler conteúdo em voz alta"
+              aria-pressed="false">
+              <span class="a11y-speech-icon a11y-speech-icon-play" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" focusable="false">
+                  <path d="M8 5.5v13l11-6.5L8 5.5Z" fill="currentColor"/>
+                </svg>
+              </span>
+              <span class="a11y-speech-icon a11y-speech-icon-pause" aria-hidden="true" hidden>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" focusable="false">
+                  <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                  <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                </svg>
+              </span>
+              <span class="a11y-speech-text" data-speech-toggle-text data-i18n="a11y.speechPlayShort">Ler</span>
+            </button>
+            <button
+              type="button"
+              class="a11y-btn a11y-btn-speech"
+              data-speech-stop
+              data-i18n-aria-label="a11y.speechStop"
+              aria-label="Interromper leitura"
+              disabled>
+              <span class="a11y-speech-icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" focusable="false">
+                  <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
+                </svg>
+              </span>
+              <span class="a11y-speech-text" data-i18n="a11y.speechStopShort">Parar</span>
+            </button>
+            <p class="speech-status" data-speech-status aria-live="polite"></p>
+          </div>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" data-nav-toggle>
+          <span class="sr-only" data-nav-toggle-label data-i18n="a11y.openMenu">Abrir menu</span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <nav class="site-nav" id="menu-principal" data-nav data-i18n-aria-label="a11y.mainNav" aria-label="Navegação principal">
+        <a href="#como-funciona" data-nav-link data-i18n="nav.how">Como funciona</a>
+        <a href="#modulos" data-nav-link data-i18n="nav.modules">Módulos</a>
+        <a href="#conexoes" data-nav-link data-i18n="nav.connect">Conexões</a>
+        <a href="#acessibilidade" data-nav-link data-i18n="nav.a11y">Acessibilidade</a>
+        <button type="button" class="btn btn-sm btn-primary" data-open-modal="contato" data-intent="conversa" data-i18n="nav.talk">Converse com a Waslaa</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media">
+        <img
+          class="hero-image"
+          data-i18n-img="hero"
+          data-i18n-alt="a11y.heroAlt"
+          src="assets/hero-waslaa.jpg"
+          width="1280"
+          height="720"
+          alt="Pessoas diversas em composição premium azul-marinho com ondas luminosas ciano e violeta: interpretação em Libras e informação acessível em tempo real."
+          fetchpriority="high"
+          decoding="async">
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="hero-content">
+        <p class="brand-hero">Waslaa</p>
+        <h1 id="hero-title" data-i18n="hero.title">Uma informação. Diferentes experiências acessíveis.</h1>
+        <p class="hero-lead" data-i18n="hero.lead">A Waslaa conecta informação e contexto para transformar mensagens em orientações acessíveis, adaptadas às necessidades de cada pessoa e ao momento em que a informação importa.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#modulos" data-i18n="hero.ctaSolutions">Conheça as soluções</a>
+          <button type="button" class="btn btn-ghost" data-open-modal="contato" data-intent="conversa" data-i18n="hero.ctaTalk">Converse com a Waslaa</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Como funciona -->
+    <section class="section section-how" id="como-funciona" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="how-title" data-i18n="how.title">Uma camada de acessibilidade para diferentes canais.</h2>
+          <p data-i18n="how.lead">Áudio, texto, vídeo, mensagens e dados entram pela Waslaa. A plataforma processa a informação e a entrega em formatos acessíveis de acordo com cada experiência.</p>
+        </header>
+
+        <figure class="layer-scene">
+          <img
+            data-i18n-img="camada"
+            data-i18n-alt="a11y.camadaAlt"
+            src="assets/camada-waslaa-prisma.png"
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+            alt="Ilustração da Camada Waslaa: informação de diferentes canais converge para um prisma translúcido e sai como Libras, legendas, conteúdo visual, áudio e alertas acessíveis.">
+          <figcaption class="sr-only" data-i18n="a11y.camadaCaption">Informação entra na Waslaa e é transformada em diferentes formas de acesso.</figcaption>
+        </figure>
+
+        <div class="how-flow" data-how-flow data-i18n-aria-label="a11y.howFlow" aria-label="Fluxo da informação pela Waslaa">
+          <div class="how-stage how-in">
+            <p class="how-stage-label" data-i18n="how.infoLabel">Informação</p>
+            <ul class="how-tags">
+              <li data-flow-item="in" data-i18n="how.inAudio">Áudio</li>
+              <li data-flow-item="in" data-i18n="how.inText">Texto</li>
+              <li data-flow-item="in" data-i18n="how.inVideo">Vídeo</li>
+              <li data-flow-item="in" data-i18n="how.inMessages">Mensagens</li>
+              <li data-flow-item="in" data-i18n="how.inData">Dados</li>
+            </ul>
+          </div>
+          <div class="how-arrow" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="how-core">
+            <p class="how-core-title">Waslaa</p>
+            <p class="how-core-desc" data-i18n="how.coreDesc">Processa e entrega</p>
+          </div>
+          <div class="how-arrow" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="how-stage how-out">
+            <p class="how-stage-label" data-i18n="how.outLabel">Experiência acessível</p>
+            <ul class="how-tags how-tags-out">
+              <li data-flow-item="out" data-i18n="how.outSign">Libras</li>
+              <li data-flow-item="out" data-i18n="how.outCaptions">Legendas</li>
+              <li data-flow-item="out" data-i18n="how.outVisual">Conteúdo visual</li>
+              <li data-flow-item="out" data-i18n="how.outAudio">Áudio</li>
+              <li data-flow-item="out" data-i18n="how.outAlerts">Alertas acessíveis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Módulos -->
+    <section class="section section-modules" id="modulos" aria-labelledby="modules-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="modules-title" data-i18n="modules.title">Uma plataforma. Diferentes formas de acesso.</h2>
+        </header>
+        <div class="modules-grid modules-grid-four">
+          <article class="module">
+            <div class="module-media">
+              <img
+                data-i18n-img="streaming"
+                data-i18n-alt="a11y.streamingAlt"
+                src="assets/segmento-streaming-curso.jpg"
+                width="1152"
+                height="864"
+                loading="lazy"
+                decoding="async"
+                alt="Ambiente de estudo com transmissão ao vivo: legendas, janela de Libras e chat acessível na tela do notebook.">
+              <div class="module-media-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="module-body">
+              <div class="module-top">
+                <p class="module-name">Waslaa API</p>
+                <span class="status status-now" data-i18n="modules.apiStatus">Disponível</span>
+              </div>
+              <h3 data-i18n="modules.apiTitle">Leve acessibilidade para dentro do seu produto.</h3>
+              <p data-i18n="modules.apiDesc">Para streaming, cursos online, aplicativos, atendimento e plataformas digitais.</p>
+              <div class="module-actions">
+                <a class="btn btn-sm btn-primary" href="https://waslaa.co/test" target="_blank" rel="noopener noreferrer" data-i18n="modules.apiTest">Experimente nosso protótipo em Libras</a>
+                <button type="button" class="btn btn-sm btn-ghost" data-open-modal="contato" data-intent="integrar" data-context="Waslaa API" data-i18n="modules.apiIntegrate">Fale sobre integração</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="module">
+            <div class="module-media">
+              <img
+                data-i18n-img="mensageria"
+                data-i18n-alt="a11y.mensageriaAlt"
+                src="assets/modulo-mensageria.jpg"
+                width="1152"
+                height="864"
+                loading="lazy"
+                alt="Pessoa usando smartphone com mensagens e resposta acessível em vídeo.">
+              <div class="module-media-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="module-body">
+              <div class="module-top">
+                <div>
+                  <p class="module-name">Waslaa Mensagens</p>
+                  <p class="module-sub">WhatsApp + Telegram</p>
+                </div>
+                <span class="status status-pilot" data-i18n="modules.msgStatus">Disponível para testes</span>
+              </div>
+              <h3 data-i18n="modules.msgTitle">Acessibilidade nos canais que as pessoas já usam.</h3>
+              <p data-i18n="modules.msgDesc">Mensageria para comunicação, atendimento e geração de conteúdos acessíveis.</p>
+              <div class="module-actions">
+                <button type="button" class="btn btn-sm btn-primary" data-open-panel="mensageria" data-i18n="modules.msgTest">Teste nossa mensageria</button>
+                <div class="channel-links">
+                  <button type="button" class="channel-link" data-open-panel="mensageria" data-channel="whatsapp" data-whatsapp-link>WhatsApp</button>
+                  <button type="button" class="channel-link" data-open-panel="mensageria" data-channel="telegram" data-telegram-link>Telegram</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="module module-compact">
+            <div class="module-media">
+              <img
+                data-i18n-img="mobilidade"
+                data-i18n-alt="a11y.mobilidadeAlt"
+                src="assets/modulo-mobilidade.png"
+                width="1280"
+                height="720"
+                loading="lazy"
+                alt="Interior de aeronave com assistente virtual anunciando informação acessível: janela de Libras, legendas e passageiros recebendo o aviso.">
+              <div class="module-media-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="module-body">
+              <div class="module-top">
+                <p class="module-name">Waslaa Mobilidade</p>
+                <span class="status status-dev" data-i18n="modules.mobStatus">Em desenvolvimento</span>
+              </div>
+              <p data-i18n="modules.mobDesc">Informação acessível para transporte, estações, aeroportos e ambientes de alto fluxo.</p>
+            </div>
+          </article>
+
+          <article class="module module-compact">
+            <div class="module-media module-media-app">
+              <div class="app-phone">
+                <div class="app-phone-bezel">
+                  <div class="app-phone-screen">
+                    <div class="app-phone-chrome">
+                      <span class="app-phone-dot" aria-hidden="true"></span>
+                      <span class="app-phone-title" data-i18n="modules.appChrome">Conversa ao vivo</span>
+                    </div>
+                    <div class="app-phone-stage">
+                      <img
+                        src="assets/modulo-app-libras-avatar.jpg"
+                        width="480"
+                        height="640"
+                        loading="lazy"
+                        data-i18n-alt="a11y.appAlt"
+                        alt="Mockup do Waslaa App: smartphone com intérprete de Libras em conversa cotidiana e legenda Vamos nos encontrar na entrada.">
+                    </div>
+                    <div class="app-phone-caption">
+                      <p data-i18n="modules.appCaption">Vamos nos encontrar na entrada.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-body">
+              <div class="module-top">
+                <p class="module-name">Waslaa App</p>
+                <span class="status status-future" data-i18n="modules.appStatus">Visão futura</span>
+              </div>
+              <p data-i18n="modules.appDesc">Uma experiência móvel para tornar conversas e informações do cotidiano mais acessíveis.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Onde a Waslaa se conecta -->
+    <section class="section section-connect" id="conexoes" aria-labelledby="connect-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="connect-title" data-i18n="connect.title">Onde a Waslaa se conecta</h2>
+          <p data-i18n="connect.lead">A mesma infraestrutura pode atender diferentes contextos.</p>
+        </header>
+        <ul class="connect-grid connect-grid-compact">
+          <li>
+            <h3 data-i18n="connect.eduTitle">Educação</h3>
+            <p data-i18n="connect.eduDesc">Cursos, aulas e conteúdos digitais.</p>
+          </li>
+          <li>
+            <h3 data-i18n="connect.supportTitle">Atendimento</h3>
+            <p data-i18n="connect.supportDesc">Serviços e comunicação com clientes.</p>
+          </li>
+          <li>
+            <h3 data-i18n="connect.streamTitle">Streaming e eventos</h3>
+            <p data-i18n="connect.streamDesc">Conteúdo ao vivo ou sob demanda.</p>
+          </li>
+          <li>
+            <h3 data-i18n="connect.mobTitle">Mobilidade</h3>
+            <p data-i18n="connect.mobDesc">Avisos, rotas e informação operacional.</p>
+          </li>
+          <li>
+            <h3 data-i18n="connect.appsTitle">Aplicativos</h3>
+            <p data-i18n="connect.appsDesc">Acessibilidade integrada a produtos digitais.</p>
+          </li>
+        </ul>
+        <div class="connect-cta">
+          <button type="button" class="btn btn-primary" data-open-modal="contato" data-intent="caso" data-context="Caso de uso" data-i18n="connect.cta">Quero explorar um caso de uso</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Acessibilidade e legislação -->
+    <section class="section section-law" id="acessibilidade" aria-labelledby="law-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="law-title" data-i18n="law.title">Acessibilidade também é um direito.</h2>
+          <p data-i18n="law.lead">Brasil, Chile e Estados Unidos possuem marcos legais que reconhecem o acesso à informação, à comunicação e às línguas de sinais como parte da inclusão. Referências internacionais complementam esse panorama com princípios e diretrizes técnicas de acessibilidade.</p>
+        </header>
+        <div class="law-grid">
+          <article class="law-card">
+            <h3 data-i18n="law.brTitle">Brasil</h3>
+            <ul>
+              <li data-i18n="law.br1">Lei Brasileira de Inclusão — Lei 13.146/2015</li>
+              <li data-i18n="law.br2">Lei de Libras — Lei 10.436/2002</li>
+            </ul>
+          </article>
+          <article class="law-card">
+            <h3 data-i18n="law.clTitle">Chile</h3>
+            <ul>
+              <li data-i18n="law.cl1">Lei 20.422 — Igualdade de oportunidades e inclusão</li>
+              <li data-i18n="law.cl2">Lei 21.303 — Reconhecimento da Língua de Sinais Chilena</li>
+            </ul>
+          </article>
+          <article class="law-card">
+            <h3 data-i18n="law.usTitle">Estados Unidos</h3>
+            <ul>
+              <li data-i18n="law.us1">Americans with Disabilities Act (ADA) — em especial os Títulos II e III, sobre acesso a serviços e comunicação</li>
+              <li data-i18n="law.us2">Rehabilitation Act — Seções 504 e 508; a Seção 508 vincula-se à acessibilidade de tecnologia e informação no governo federal</li>
+            </ul>
+          </article>
+          <article class="law-card">
+            <h3 data-i18n="law.intTitle">Internacional</h3>
+            <ul>
+              <li data-i18n="law.int1">Convenção da ONU sobre os Direitos das Pessoas com Deficiência (CRPD/CDPD) — arts. 9 (acessibilidade) e 21 (liberdade de expressão, opinião e acesso à informação)</li>
+              <li data-i18n="law.int2">WCAG — diretriz técnica internacional de acessibilidade digital (padrão técnico, não legislação)</li>
+            </ul>
+          </article>
+        </div>
+        <p class="law-close" data-i18n="law.close">A Waslaa transforma princípios de acessibilidade e referências regulatórias em experiências de comunicação mais inclusivas, considerando boas práticas e diretrizes aplicáveis em cada contexto.</p>
+      </div>
+    </section>
+
+    <!-- 6. CTA final -->
+    <section class="section section-cta" id="contato-final" aria-labelledby="cta-title">
+      <div class="container cta-final">
+        <h2 id="cta-title" data-i18n="cta.title">Onde existe informação, pode existir mais acesso.</h2>
+        <p data-i18n="cta.lead">Quer tornar seu produto, conteúdo ou canal mais acessível?</p>
+        <div class="cta-row">
+          <button type="button" class="btn btn-primary" data-open-modal="contato" data-intent="conversa" data-i18n="cta.talk">Converse com a Waslaa</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="footer-brand-link" href="#topo" data-i18n-aria-label="a11y.brandFooter" aria-label="Waslaa — voltar ao início">
+          <img
+            class="brand-logo brand-logo-footer"
+            src="assets/logo-waslaa-mark.png"
+            width="209"
+            height="205"
+            alt="Waslaa"
+            decoding="async">
+        </a>
+        <p data-i18n="footer.tagline">Informação acessível, no momento em que importa.</p>
+        <p class="footer-legal">WASLAA SpA <span aria-hidden="true">|</span> RUT: 78.320.791-5 <span aria-hidden="true">|</span> <a href="tel:+56940990412">+56 9 4099 0412</a> <span aria-hidden="true">|</span> Rosa Eguiguren 813, Santiago, Chile</p>
+      </div>
+      <nav data-i18n-aria-label="a11y.footerNav" aria-label="Rodapé">
+        <a href="#como-funciona" data-i18n="nav.how">Como funciona</a>
+        <a href="#modulos" data-i18n="nav.modules">Módulos</a>
+        <a href="#conexoes" data-i18n="nav.connect">Conexões</a>
+        <a href="#acessibilidade" data-i18n="nav.a11y">Acessibilidade</a>
+        <button type="button" data-open-panel="privacidade" data-i18n="nav.privacy">Privacidade</button>
+      </nav>
+      <aside class="footer-support" data-i18n-aria-label="a11y.footerSupport" aria-label="Apoio e parceria">
+        <a
+          class="footer-support-link"
+          href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;url=https%3A%2F%2Ftechnovation.cl%2Fprograma-mujeres-programando-nuestro-futuro-disminucion-de-la-brecha-de-genero-en-stem%2Flogo-proyecto-apoyado-por-corfo%2F&amp;ved=0CBYQjRxqFwoTCICM4Zmc9pYDFQAAAAAdAAAAABA4&amp;opi=89978449"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n-aria-label="a11y.corfoSupport"
+          aria-label="Projeto apoiado por CORFO e Gobierno de Chile (abre em nova aba)">
+          <span class="footer-support-label" data-i18n="footer.corfoSupport">Projeto apoiado por</span>
+          <span class="footer-support-logos" aria-hidden="true">
+            <img
+              class="footer-logo footer-logo-corfo"
+              src="assets/logo-corfo.png"
+              width="140"
+              height="48"
+              alt=""
+              decoding="async">
+            <img
+              class="footer-logo footer-logo-gob"
+              src="assets/logo-gobierno-chile.png"
+              width="48"
+              height="48"
+              alt=""
+              decoding="async">
+          </span>
+        </a>
+      </aside>
+      <p class="footer-copy" data-i18n-footer-copy>© <span data-year></span> Waslaa. Mockup interativo para demonstração.</p>
+    </div>
+  </footer>
+
+  <!-- Modal de contato -->
+  <div class="modal" id="modal-contato" hidden role="dialog" aria-modal="true" aria-labelledby="modal-contato-title">
+    <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+    <div class="modal-panel" role="document">
+      <button type="button" class="modal-close" data-close-modal data-i18n-aria-label="a11y.close" aria-label="Fechar">×</button>
+      <h2 id="modal-contato-title" data-i18n="intents.conversa.title">Converse com a Waslaa</h2>
+      <p class="modal-lead" data-modal-lead data-i18n="form.leadDefault">Conte o contexto da sua organização. Neste mockup, o contato fica salvo apenas neste navegador.</p>
+      <form id="form-contato" novalidate>
+        <input type="hidden" name="intent" id="field-intent" value="conversa">
+        <input type="hidden" name="context" id="field-context" value="">
+        <div class="field">
+          <label for="field-nome" data-i18n="form.nome">Nome completo</label>
+          <input type="text" id="field-nome" name="nome" required autocomplete="name" data-i18n-placeholder="form.nomePh" placeholder="Seu nome">
+          <span class="field-error" data-error-for="nome" data-i18n="form.nomeErr" hidden>Informe seu nome.</span>
+        </div>
+        <div class="field">
+          <label for="field-email" data-i18n="form.email">E-mail profissional</label>
+          <input type="email" id="field-email" name="email" required autocomplete="email" data-i18n-placeholder="form.emailPh" placeholder="voce@organizacao.com">
+          <span class="field-error" data-error-for="email" data-i18n="form.emailErr" hidden>Informe um e-mail válido.</span>
+        </div>
+        <div class="field">
+          <label for="field-org" data-i18n="form.org">Organização</label>
+          <input type="text" id="field-org" name="organizacao" autocomplete="organization" data-i18n-placeholder="form.orgPh" placeholder="Empresa, órgão ou iniciativa">
+        </div>
+        <div class="field">
+          <label for="field-segmento" data-i18n="form.segment">Segmento de interesse</label>
+          <select id="field-segmento" name="segmento">
+            <option value="" data-i18n="form.segmentPh">Selecione</option>
+            <option value="Educação" data-i18n="form.segEdu">Educação</option>
+            <option value="Atendimento" data-i18n="form.segSupport">Atendimento</option>
+            <option value="Streaming e eventos" data-i18n="form.segStream">Streaming e eventos</option>
+            <option value="Mobilidade" data-i18n="form.segMob">Mobilidade</option>
+            <option value="Aplicativos" data-i18n="form.segApps">Aplicativos</option>
+            <option value="Waslaa API" data-i18n="form.segApi">Waslaa API</option>
+            <option value="Waslaa Mensagens" data-i18n="form.segMsg">Waslaa Mensagens</option>
+            <option value="Outro" data-i18n="form.segOther">Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="field-mensagem" data-i18n="form.message">Mensagem</label>
+          <textarea id="field-mensagem" name="mensagem" rows="4" required data-i18n-placeholder="form.messagePh" placeholder="Em que contexto a informação precisa chegar de forma acessível?"></textarea>
+          <span class="field-error" data-error-for="mensagem" data-i18n="form.messageErr" hidden>Descreva brevemente o contexto.</span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" data-i18n="form.submit">Enviar mensagem</button>
+          <button type="button" class="btn btn-ghost" data-close-modal data-i18n="form.cancel">Cancelar</button>
+        </div>
+      </form>
+      <div class="form-success" id="form-success" hidden>
+        <h3 data-i18n="form.successTitle">Mensagem registrada</h3>
+        <p data-success-text></p>
+        <button type="button" class="btn btn-primary" data-close-modal data-i18n="form.close">Fechar</button>
+        <button type="button" class="btn btn-text" data-open-panel="leads" data-i18n="form.viewLeads">Ver contatos salvos neste navegador</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Painel protótipo API -->
+  <div class="modal" id="panel-prototipo" hidden role="dialog" aria-modal="true" aria-labelledby="proto-title">
+    <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+    <div class="modal-panel modal-wide" role="document">
+      <button type="button" class="modal-close" data-close-modal data-i18n-aria-label="a11y.close" aria-label="Fechar">×</button>
+      <h2 id="proto-title" data-i18n="proto.title">Protótipo Waslaa API</h2>
+      <p class="modal-lead" data-i18n="proto.lead">Demonstração do fluxo disponível: a informação entra e sai em formato acessível.</p>
+      <div class="proto-demo" data-i18n-aria-label="a11y.protoDemo" aria-label="Demonstração do protótipo">
+        <div class="proto-col">
+          <p class="proto-label" data-i18n="proto.inputLabel">Entrada</p>
+          <p class="proto-sample" data-proto-input data-i18n="proto.inputSample">“O módulo começa em cinco minutos. Acesse a sala virtual.”</p>
+        </div>
+        <div class="proto-core" aria-hidden="true">Waslaa API</div>
+        <div class="proto-col">
+          <p class="proto-label" data-i18n="proto.outputLabel">Saída acessível</p>
+          <ul class="proto-outputs">
+            <li><strong data-i18n="proto.outCaption">Legenda</strong><span data-i18n="proto.outCaptionDesc"> — texto sincronizado</span></li>
+            <li><strong data-i18n="proto.outSign">Libras</strong><span data-i18n="proto.outSignDesc"> — janela de interpretação</span></li>
+            <li><strong data-i18n="proto.outAudio">Áudio</strong><span data-i18n="proto.outAudioDesc"> — versão contextual</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal data-i18n="proto.close">Fechar</button>
+        <button type="button" class="btn btn-ghost" data-open-modal="contato" data-intent="integrar" data-context="Waslaa API" data-i18n="proto.integrate">Fale sobre integração</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Painel mensageria -->
+  <div class="modal" id="panel-mensageria" hidden role="dialog" aria-modal="true" aria-labelledby="msg-title">
+    <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+    <div class="modal-panel modal-wide" role="document">
+      <button type="button" class="modal-close" data-close-modal data-i18n-aria-label="a11y.close" aria-label="Fechar">×</button>
+      <h2 id="msg-title" data-i18n="msg.title">Teste a mensageria Waslaa</h2>
+      <p class="modal-lead" data-msg-lead data-i18n="msg.lead">Disponível para testes no WhatsApp e no Telegram — canais que as pessoas já usam.</p>
+      <div class="demo-channels">
+        <button type="button" class="demo-channel is-active" data-select-channel="whatsapp" data-whatsapp-link aria-pressed="true">
+          <strong>WhatsApp</strong>
+          <span data-i18n="msg.waDesc">Envie áudio ou texto e receba conteúdo acessível no mesmo chat.</span>
+        </button>
+        <button type="button" class="demo-channel" data-select-channel="telegram" data-telegram-link aria-pressed="false">
+          <strong>Telegram</strong>
+          <span data-i18n="msg.tgDesc">Mesma experiência no canal que sua equipe já utiliza.</span>
+        </button>
+      </div>
+      <div class="msg-preview" data-msg-preview>
+        <p class="msg-preview-meta"><span data-msg-channel>WhatsApp</span><span data-i18n="msg.previewMeta"> · conversa de demonstração</span></p>
+        <p class="msg-bubble msg-in" data-msg-in data-i18n="msg.waIn">Áudio · 0:12 — “A aula de hoje começa às 19h.”</p>
+        <p class="msg-bubble msg-out" data-msg-out data-i18n="msg.waOut">Waslaa · vídeo em Libras + legenda enviados</p>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal data-i18n="msg.close">Fechar</button>
+        <button type="button" class="btn btn-primary" data-open-modal="contato" data-intent="integrar" data-context="Waslaa Mensagens" data-i18n="msg.talk">Falar sobre mensageria</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Painel privacidade -->
+  <div class="modal" id="panel-privacidade" hidden role="dialog" aria-modal="true" aria-labelledby="priv-title">
+    <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+    <div class="modal-panel modal-wide" role="document">
+      <button type="button" class="modal-close" data-close-modal data-i18n-aria-label="a11y.close" aria-label="Fechar">×</button>
+      <h2 id="priv-title" data-i18n="privacy.title">Princípios de privacidade</h2>
+      <div class="prose">
+        <p data-i18n="privacy.p1">A Waslaa trata acessibilidade como direito de acesso à informação. Neste mockup, formulários são salvos apenas no localStorage do seu navegador — nenhum dado é enviado a um servidor.</p>
+        <h3 data-i18n="privacy.h3">Na visão do produto</h3>
+        <ul>
+          <li data-i18n="privacy.li1">Finalidade limitada: processar e entregar experiências acessíveis.</li>
+          <li data-i18n="privacy.li2">Minimização: apenas o necessário para o serviço contratado.</li>
+          <li data-i18n="privacy.li3">Sem comercialização de dados pessoais de usuários finais.</li>
+          <li data-i18n="privacy.li4">Controles claros para organizações integradoras sobre retenção e exclusão.</li>
+          <li data-i18n="privacy.li5">Transparência sobre o status de cada módulo e canal.</li>
+        </ul>
+        <p data-i18n="privacy.p2">Documentação jurídica completa será publicada com os primeiros contratos comerciais.</p>
+      </div>
+      <button type="button" class="btn btn-primary" data-close-modal data-i18n="privacy.ok">Entendi</button>
+    </div>
+  </div>
+
+  <!-- Painel leads salvos -->
+  <div class="modal" id="panel-leads" hidden role="dialog" aria-modal="true" aria-labelledby="leads-title">
+    <div class="modal-backdrop" data-close-modal tabindex="-1"></div>
+    <div class="modal-panel modal-wide" role="document">
+      <button type="button" class="modal-close" data-close-modal data-i18n-aria-label="a11y.close" aria-label="Fechar">×</button>
+      <h2 id="leads-title" data-i18n="leads.title">Contatos neste navegador</h2>
+      <p class="modal-lead" data-i18n="leads.lead">Dados de demonstração persistidos via localStorage.</p>
+      <div id="leads-list"></div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-clear-leads data-i18n="leads.clear">Limpar dados locais</button>
+        <button type="button" class="btn btn-primary" data-close-modal data-i18n="leads.close">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
