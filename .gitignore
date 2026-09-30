@@ -1,0 +1,26 @@
+# Ambiente / tooling interno
+.maestro/
+agents.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Ambientes locais
+.env
+.env.*
+!.env.example
+
+# Logs e temporários
+*.log
+tmp/
+temp/
+.cache/
