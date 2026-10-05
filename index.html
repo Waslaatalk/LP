@@ -8,6 +8,11 @@
   <title>Waslaa — Informação Acessível em Tempo Real</title>
   <script>
     (function () {
+      var pathname = (window.location.pathname || "").replace(/\/+$/, "");
+      if (pathname.endsWith("/teste")) {
+        window.location.replace("https://app.waslaa.co/" + window.location.search + window.location.hash);
+        return;
+      }
       try {
         var key = "waslaa_theme_v1";
         var stored = localStorage.getItem(key);
