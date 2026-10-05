@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página não encontrada — Waslaa</title>
-  <meta name="description" content="Página não encontrada.">
+  <title>Redirecionando para Waslaa App...</title>
+  <meta name="description" content="Redirecionamento para a plataforma Waslaa.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://app.waslaa.co/">
+  <meta http-equiv="refresh" content="0; url=https://app.waslaa.co/">
   <script>
     (function () {
-      var pathname = (window.location.pathname || "").replace(/\/+$/, "");
-      if (pathname.endsWith("/teste")) {
-        var queryAndHash = (window.location.search || "") + (window.location.hash || "");
-        window.location.replace("https://app.waslaa.co/" + queryAndHash);
-      }
+      var targetBase = "https://app.waslaa.co/";
+      var queryAndHash = (window.location.search || "") + (window.location.hash || "");
+      window.location.replace(targetBase + queryAndHash);
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +48,7 @@
       padding: 1.5rem;
       text-align: center;
     }
-    .card {
+    .redirect-card {
       max-width: 480px;
       width: 100%;
       background: var(--card-bg);
@@ -63,21 +64,21 @@
       height: auto;
       margin-bottom: 2rem;
     }
-    .badge {
-      display: inline-block;
-      font-family: "Outfit", sans-serif;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--cyan);
-      background: rgba(62, 224, 212, 0.12);
-      border: 1px solid rgba(62, 224, 212, 0.3);
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      margin-bottom: 1rem;
+    .spinner {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 1.5rem auto;
+      border: 3px solid rgba(62, 224, 212, 0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.9s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     h1 {
       font-family: "Outfit", sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 0.75rem;
@@ -87,12 +88,7 @@
       color: var(--text-muted);
       font-size: 1rem;
       line-height: 1.5;
-      margin-bottom: 2rem;
-    }
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      margin-bottom: 1.75rem;
     }
     .btn {
       display: inline-flex;
@@ -102,43 +98,49 @@
       font-family: "Outfit", sans-serif;
       font-size: 1rem;
       font-weight: 600;
+      color: #060b18;
+      background: var(--cyan);
       border-radius: 999px;
       text-decoration: none;
       transition: all 0.2s ease;
-    }
-    .btn-primary {
-      color: #060b18;
-      background: var(--cyan);
       box-shadow: 0 4px 18px rgba(62, 224, 212, 0.35);
     }
-    .btn-primary:hover, .btn-primary:focus-visible {
+    .btn:hover, .btn:focus-visible {
       background: var(--cyan-hover);
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(62, 224, 212, 0.5);
-    }
-    .btn-secondary {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover, .btn-secondary:focus-visible {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
+      outline: 2px solid var(--cyan-hover);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <a href="./">
-      <img src="assets/logo-waslaa-uso-externo.png" alt="Waslaa" class="logo" width="377" height="124">
-    </a>
-    <div><span class="badge">404</span></div>
-    <h1>Página não encontrada</h1>
-    <p>O conteúdo que você procura não foi encontrado ou foi movido.</p>
-    <div class="actions">
-      <a href="./" class="btn btn-primary">Voltar para o início</a>
-      <a href="https://app.waslaa.co/" class="btn btn-secondary">Acessar Waslaa App</a>
-    </div>
+  <main class="redirect-card">
+    <img
+      src="assets/logo-waslaa-uso-externo.png"
+      onerror="if (!this.getAttribute('data-tried')) { this.setAttribute('data-tried', '1'); this.src = '../assets/logo-waslaa-uso-externo.png'; }"
+      alt="Waslaa"
+      class="logo"
+      width="377"
+      height="124"
+    >
+    <div class="spinner" role="status" aria-label="Carregando"></div>
+    <h1>Redirecionando para Waslaa App</h1>
+    <p>Você está sendo direcionado para o aplicativo da Waslaa. Se não for redirecionado automaticamente, clique no botão abaixo:</p>
+    <a id="redirect-link" href="https://app.waslaa.co/" class="btn">Acessar Waslaa App</a>
   </main>
+
+  <script>
+    (function () {
+      var targetBase = "https://app.waslaa.co/";
+      var queryAndHash = (window.location.search || "") + (window.location.hash || "");
+      var fullUrl = targetBase + queryAndHash;
+      var link = document.getElementById("redirect-link");
+      if (link) {
+        link.href = fullUrl;
+      }
+      window.location.replace(fullUrl);
+    })();
+  </script>
 </body>
 </html>
